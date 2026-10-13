@@ -4,52 +4,71 @@
    then add media queries for bigger screens.
    Compare with mockups/desktop.png and mockups/mobile.png
    ========================================================== */
-
-/* TODO 1: Design tokens
-   Create CSS variables on :root for colours, spacing and radius.
-   Suggested palette:
-     ink #222322   text #3a3d3a   muted #5f645f   background #f6f7f2
-     surface #ffffff   line #e2e5dc   accent #d3ff50   accent-dark #4d6b00 */
 :root {
-
+  --ink: #222322;
+  --text: #3a3d3a;
+  --muted: #5f645f;
+  --bg: #f6f7f2;
+  --line: #e2e5dc;
+  --accent: #d3ff50;
 }
 
-/* TODO 2: Reset
-   - box-sizing: border-box on everything
-   - images: max-width: 100%; height: auto; display: block
-   - remove default margins on body, headings, paragraphs */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 Arial, sans-serif; }
+h1, h2, h3, p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #4d6b00; outline-offset: 3px; }
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 2; background: white; padding: .5rem; }
 
+.site-header { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: 1rem; background: white; border-bottom: 1px solid var(--line); }
+.logo img { width: 160px; }
+.nav-list, .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; padding: 0; list-style: none; }
+.nav-list a { text-decoration: none; font-weight: 600; }
+.search { display: flex; flex: 1 1 100%; gap: .5rem; }
+.search label, .newsletter-form label { color: var(--muted); }
+input { min-width: 0; padding: .65rem; border: 2px solid var(--line); border-radius: 10px; font: inherit; }
+.search input { flex: 1; }
+.btn { padding: .65rem 1rem; border: 2px solid var(--ink); border-radius: 10px; background: white; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.btn:hover { background: var(--line); }
+.btn-primary { border-color: var(--accent); background: var(--accent); }
+.btn-primary:hover { background: #c5ef3f; }
 
-/* TODO 3: Base typography (body font, size, line-height, colours) */
+main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
+.hero { display: grid; gap: 1.5rem; padding: 1.5rem; border-radius: 24px; background: var(--ink); color: white; }
+.hero-text { display: grid; justify-items: start; align-content: center; gap: 1rem; }
+.hero h1 { font-size: 2rem; line-height: 1.15; }
+.hero img { width: 100%; border-radius: 12px; }
+#products { padding: 2rem 0; }
+.section-sub, .card-rating { color: var(--muted); }
+.products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.card { height: 100%; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; background: white; }
+.card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+.card-category { margin-top: .6rem; color: var(--muted); font-size: .8rem; text-transform: uppercase; }
+.card-title { font-size: 1rem; }
+.card-title a { text-decoration: none; }
+.card-price { font-size: 1.25rem; font-weight: 700; }
+.card-rating { margin: .25rem 0; }
+.card .btn { width: 100%; }
+.newsletter { padding: 1.25rem; border: 2px solid var(--ink); border-radius: 20px; background: white; }
+.newsletter p { margin: .25rem 0 1rem; }
+.newsletter-form { display: grid; gap: .5rem; }
+.newsletter-form input, .newsletter-form button { width: 100%; }
+.site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1rem; background: var(--ink); color: white; }
+.site-footer a { color: var(--accent); }
 
+@media (min-width: 768px) {
+  .site-header { flex-wrap: nowrap; justify-content: space-between; padding: 1rem 2rem; }
+  .search { flex: 0 1 380px; }
+  .search label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+  .hero { grid-template-columns: 1fr 1fr; align-items: center; padding: 2.5rem; }
+  .hero h1 { font-size: 3rem; }
+  .newsletter-form { grid-template-columns: auto 1fr auto; align-items: center; }
+}
 
-/* TODO 4: Buttons (.btn and .btn-primary), with :hover styles */
-
-
-/* TODO 5: Header
-   - Flexbox: logo, nav and search in a row (wrap on mobile)
-   - position: sticky; top: 0  so it stays visible while scrolling */
-
-
-/* TODO 6: Hero
-   - dark background, white heading
-   - one column on mobile, two columns from 768px */
-
-
-/* TODO 7: Product grid
-   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
-   Cards: white, rounded, padding.
-   Images: aspect-ratio: 1 / 1; object-fit: cover */
-
-
-/* TODO 8: Newsletter form and footer */
-
-
-/* TODO 9: Accessibility
-   - visible :focus-visible outline on links, buttons and inputs
-   - check text contrast with DevTools */
-
-
-/* TODO 10: Media queries
-@media (min-width: 768px) { ... }
-@media (min-width: 1024px) { ... } */
+@media (min-width: 1024px) {
+  .site-header { padding-inline: max(2rem, calc((100% - 1200px) / 2)); }
+  main { padding-inline: 0; }
+  .hero { padding: 2.5rem; }
+}
